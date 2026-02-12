@@ -5,6 +5,18 @@
 **Institution:** Elyan Labs (Independent Research)
 **Hardware:** IBM POWER8 S824 (320GB RAM, Dual 8-core)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18321905.svg)](https://doi.org/10.5281/zenodo.18321905)
+
+## Publications
+
+| Paper | DOI | Date |
+|-------|-----|------|
+| **RAM Coffers: NUMA-Distributed Weight Banking** | [10.5281/zenodo.18321905](https://doi.org/10.5281/zenodo.18321905) | Jan 2026 |
+| **Non-Bijunctive Permutation Collapse** (vec_perm for LLM attention) | [10.5281/zenodo.18623920](https://doi.org/10.5281/zenodo.18623920) | Feb 2026 |
+| **PSE Hardware Entropy for Behavioral Divergence** (mftb injection) | [10.5281/zenodo.18623922](https://doi.org/10.5281/zenodo.18623922) | Feb 2026 |
+| **Neuromorphic Prompt Translation** (GRAIL-V, emotional prompting) | [10.5281/zenodo.18623594](https://doi.org/10.5281/zenodo.18623594) | Feb 2026 |
+| **RustChain: One CPU, One Vote** (Proof of Antiquity consensus) | [10.5281/zenodo.18623592](https://doi.org/10.5281/zenodo.18623592) | Feb 2026 |
+
 ## Abstract
 
 This work introduces **RAM Coffers**, a NUMA-aware conditional memory architecture for efficient Large Language Model (LLM) inference. The system selectively houses model knowledge across distributed RAM banks with resonance-based routing, enabling O(1) knowledge retrieval without GPU dependency.
@@ -98,8 +110,27 @@ MIT License - Free to use, modify, and distribute with attribution.
   month = {12},
   day = {16},
   publisher = {Zenodo},
-  url = {https://zenodo.org/},
+  doi = {10.5281/zenodo.18321905},
+  url = {https://doi.org/10.5281/zenodo.18321905},
   note = {Independent research predating DeepSeek Engram (arXiv:2601.07372) by 27 days}
+}
+
+@article{boudreaux2026vecperm,
+  author = {Boudreaux, Scott},
+  title = {Non-Bijunctive Permutation Collapse: AltiVec vec\_perm Enables Single-Cycle Attention Path Selection},
+  year = {2026},
+  publisher = {Zenodo},
+  doi = {10.5281/zenodo.18623920},
+  url = {https://doi.org/10.5281/zenodo.18623920}
+}
+
+@article{boudreaux2026pse,
+  author = {Boudreaux, Scott},
+  title = {Hardware Entropy Injection for Behavioral Divergence in LLM Inference: The PSE Framework on IBM POWER8},
+  year = {2026},
+  publisher = {Zenodo},
+  doi = {10.5281/zenodo.18623922},
+  url = {https://doi.org/10.5281/zenodo.18623922}
 }
 ```
 

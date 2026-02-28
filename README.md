@@ -17,6 +17,7 @@
 | **PSE Hardware Entropy for Behavioral Divergence** (mftb injection) | [10.5281/zenodo.18623922](https://doi.org/10.5281/zenodo.18623922) | Feb 2026 |
 | **Neuromorphic Prompt Translation** (GRAIL-V, emotional prompting) | [10.5281/zenodo.18623594](https://doi.org/10.5281/zenodo.18623594) | Feb 2026 |
 | **RustChain: One CPU, One Vote** (Proof of Antiquity consensus) | [10.5281/zenodo.18623592](https://doi.org/10.5281/zenodo.18623592) | Feb 2026 |
+| **Memory Scaffolding Shapes LLM Inference** (persistent context effects) | [10.5281/zenodo.18817988](https://doi.org/10.5281/zenodo.18817988) | Feb 2026 |
 
 ## Abstract
 
@@ -69,6 +70,13 @@ See **[/grail-v-paper](./grail-v-paper/)** for the full CVPR 2026 submission:
 - Theoretical grounding via Hopfield/EBM frameworks
 
 **Key Finding**: Complex multi-character emotional scenes benefit ~33% efficiency regardless of architecture.
+
+## Memory Scaffolding
+
+The elyan-prime MCP server that powers the persistent memory system used during development of RAM Coffers is itself the subject of research. The paper **"Memory Scaffolding Shapes LLM Inference"** ([DOI 10.5281/zenodo.18817988](https://doi.org/10.5281/zenodo.18817988)) demonstrates that persistent context (600+ memories) fundamentally changes how an LLM architects solutions — the iterative compounding that produced RAM Coffers is a direct example of this effect.
+
+- Repository: [Scottcjn/elyan-prime](https://github.com/Scottcjn/elyan-prime)
+- Article: [Dev.to — Memory Scaffolding Shapes LLM Inference](https://dev.to/scottcjn/memory-scaffolding-shapes-llm-inference-how-persistent-context-changes-what-ai-builds-plj)
 
 ---
 
@@ -133,6 +141,15 @@ MIT License - Free to use, modify, and distribute with attribution.
   doi = {10.5281/zenodo.18623922},
   url = {https://doi.org/10.5281/zenodo.18623922}
 }
+
+@article{boudreaux2026memoryscaffolding,
+  author = {Boudreaux, Scott},
+  title = {Memory Scaffolding Shapes LLM Inference: How Persistent Context Changes What AI Builds},
+  year = {2026},
+  publisher = {Zenodo},
+  doi = {10.5281/zenodo.18817988},
+  url = {https://doi.org/10.5281/zenodo.18817988}
+}
 ```
 
 ## Contact
@@ -154,3 +171,4 @@ This repository is header-focused; there is no single build script yet. A fast w
 - [Grokipedia: RAM Coffers Search](https://grokipedia.com/search?q=RAM%20Coffers)
 - [I Run LLMs on a 768GB IBM POWER8 Server](https://dev.to/scottcjn/i-run-llms-on-a-768gb-ibm-power8-server-and-its-faster-than-you-think-1o) - Dev.to article covering RAM Coffers
 - [Proof of Antiquity: A Blockchain That Rewards Vintage Hardware](https://dev.to/scottcjn/proof-of-antiquity-a-blockchain-that-rewards-vintage-hardware-4ii3) - Dev.to
+- [Memory Scaffolding Shapes LLM Inference](https://dev.to/scottcjn/memory-scaffolding-shapes-llm-inference-how-persistent-context-changes-what-ai-builds-plj) - Dev.to article on persistent memory effects

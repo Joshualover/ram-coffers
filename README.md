@@ -224,3 +224,13 @@ This repository is header-focused; there is no single build script yet. A fast w
 - Redis for session
 - Browser cache
 - CDN integration
+
+## Additional Resources
+
+- **Full Paper**: [RAM Coffers on Zenodo](https://doi.org/10.5281/zenodo.18321905)
+- **BCOS Certification**: See [BCOS.md](BCOS.md) for certification details
+- **Contributing**: Read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
+
+---
+
+*RAM Coffers predates DeepSeek's Engram architecture by 27 days, establishing priority for NUMA-aware weight banking in LLM inference.*

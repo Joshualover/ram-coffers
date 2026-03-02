@@ -163,7 +163,7 @@ def queue_prompt(workflow: dict) -> Tuple[str, float]:
         return str(e), 0
 
 
-def run_single_test(test: TestCase, seed: int, test_type: str) -> dict:
+def run_single_test(test: TestCase, seed: int, test_type: str, markdown_mode: bool = False) -> dict:
     """Run a single STOCK or NEURO test"""
 
     negative = "worst quality, blurry, distorted, frozen, static, motionless, deformed"
@@ -200,7 +200,7 @@ def run_single_test(test: TestCase, seed: int, test_type: str) -> dict:
     workflow = build_workflow(prompt, negative, params, test.image_path, prefix)
     prompt_id, queue_time = queue_prompt(workflow)
 
-    return {
+    result = {
         "test_name": test.name,
         "test_type": test_type,
         "seed": seed,
@@ -212,8 +212,14 @@ def run_single_test(test: TestCase, seed: int, test_type: str) -> dict:
         "emotional_arc": test.emotional_arc
     }
 
+    # Output markdown row if in markdown mode
+    if markdown_mode:
+        print(f"| {test.name} | {test.subject_type} | {test.emotional_arc} | {test_type} | {params['steps']} | {seed} | {queue_time:.2f} |")
 
-def run_benchmark_suite(num_seeds: int = 3, tests_to_run: List[str] = None):
+    return result
+
+
+def run_benchmark_suite(num_seeds: int = 3, tests_to_run: List[str] = None, markdown_mode: bool = False):
     """Run the full benchmark suite"""
 
     print("=" * 70)
@@ -253,16 +259,20 @@ def run_benchmark_suite(num_seeds: int = 3, tests_to_run: List[str] = None):
         # Run tests for each seed
         for seed_idx, seed in enumerate(test_seeds):
             # Stock test
-            print(f"    [{seed_idx+1}/{num_seeds}] STOCK (30 steps, seed={seed})...", end=" ")
-            stock_result = run_single_test(test, seed, "stock")
+            if not markdown_mode:
+                print(f"    [{seed_idx+1}/{num_seeds}] STOCK (30 steps, seed={seed})...", end=" ")
+            stock_result = run_single_test(test, seed, "stock", markdown_mode)
             results.append(stock_result)
-            print(f"queued: {stock_result['prompt_id'][:8]}...")
+            if not markdown_mode:
+                print(f"queued: {stock_result['prompt_id'][:8]}...")
 
             # Neuro test
-            print(f"    [{seed_idx+1}/{num_seeds}] NEURO (24 steps, seed={seed})...", end=" ")
-            neuro_result = run_single_test(test, seed, "neuro")
+            if not markdown_mode:
+                print(f"    [{seed_idx+1}/{num_seeds}] NEURO (24 steps, seed={seed})...", end=" ")
+            neuro_result = run_single_test(test, seed, "neuro", markdown_mode)
             results.append(neuro_result)
-            print(f"queued: {neuro_result['prompt_id'][:8]}...")
+            if not markdown_mode:
+                print(f"queued: {neuro_result['prompt_id'][:8]}...")
 
     # Save results manifest
     manifest = {
@@ -293,13 +303,13 @@ def run_benchmark_suite(num_seeds: int = 3, tests_to_run: List[str] = None):
     return manifest
 
 
-def quick_test(num_tests: int = 2, num_seeds: int = 2):
+def quick_test(num_tests: int = 2, num_seeds: int = 2, markdown_mode: bool = False):
     """Quick test with subset for validation"""
     print("QUICK TEST MODE")
     print(f"Running {num_tests} tests with {num_seeds} seeds each\n")
 
     test_names = [t.name for t in TEST_CASES[:num_tests]]
-    return run_benchmark_suite(num_seeds=num_seeds, tests_to_run=test_names)
+    return run_benchmark_suite(num_seeds=num_seeds, tests_to_run=test_names, markdown_mode=markdown_mode)
 
 
 if __name__ == "__main__":
@@ -320,13 +330,13 @@ if __name__ == "__main__":
         print("|-----------|--------------|---------------|-----------|-------|------|----------------|")
 
     if args.mode == "quick":
-        quick_test(num_tests=2, num_seeds=2)
+        quick_test(num_tests=2, num_seeds=2, markdown_mode=args.markdown)
     elif args.mode == "full":
-        run_benchmark_suite(num_seeds=5)
+        run_benchmark_suite(num_seeds=5, markdown_mode=args.markdown)
     else:
         print("Usage:")
         print("  python neuromorphic_benchmark_suite.py quick  # 2 tests, 2 seeds each")
         print("  python neuromorphic_benchmark_suite.py full   # All tests, 5 seeds each")
         print("  python neuromorphic_benchmark_suite.py quick --markdown  # Output as markdown table")
         print("\nRunning quick test by default...")
-        quick_test(num_tests=2, num_seeds=2)
+        quick_test(num_tests=2, num_seeds=2, markdown_mode=args.markdown)

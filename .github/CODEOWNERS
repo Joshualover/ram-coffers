@@ -1,0 +1,6 @@
+# Code owners for ram-coffers
+# @Scottcjn is the default owner
+* @Scottcjn
+
+# Hardware-specific code
+*.h @Scottcjn

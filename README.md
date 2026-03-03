@@ -33,6 +33,61 @@ Key innovations include:
 
 4. **DCBT Resident Prefetch**: PowerPC data cache block touch hints for L2/L3 residency, achieving 147+ tokens/second on POWER8
 
+## Quick Start
+
+### Prerequisites
+
+- **Hardware**: NUMA system (dual-socket AMD/Intel, IBM POWER8/9, or similar)
+- **OS**: Linux with NUMA support (`numactl` available)
+- **Memory**: 64GB+ recommended (coffers scale with available RAM)
+- **Compiler**: GCC/Clang with VSX/AVX2 support
+
+### Build
+
+```bash
+git clone https://github.com/Scottcjn/ram-coffers.git
+cd ram-coffers
+
+# Include in your project
+gcc -O3 -mvsx -maltivec -Inumactl-dev your_program.c -lnuma -o your_program
+```
+
+### Basic Usage
+
+```c
+#include "ggml-ram-coffers.h"
+
+// Initialize coffers across NUMA nodes
+struct ram_coffers *coffers = ram_coffers_init();
+
+// Route query to appropriate coffer
+int node = route_to_coffer(coffers, query_embedding);
+
+// Activate coffer with prefetch
+activate_coffer(coffers, node);
+
+// Perform inference with collapsed paths
+generate_with_pse(coffers, prompt);
+```
+
+### Verify NUMA Topology
+
+```bash
+# Check NUMA nodes
+numactl --hardware
+
+# Test memory bandwidth per node
+numactl --cpunodebind=0 --membind=0 ./your_program
+numactl --cpunodebind=1 --membind=1 ./your_program
+```
+
+### Performance Tuning
+
+- **DCBT hints**: Enable for L2/L3 cache residency on PowerPC
+- **Thread affinity**: Pin inference threads to coffer NUMA nodes
+- **Coffer sizing**: Adjust based on workload domain distribution
+
+
 ## Architecture
 
 ```
